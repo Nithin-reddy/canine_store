@@ -1,0 +1,98 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="BasicAuth">
+    <meta name="author" content="siddub">
+    <title>Canine Center</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+
+
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            background: #fafafa;
+        }
+
+        .text1 {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* number of lines to show */
+            -webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3" style="color: white;">
+        <img src="/logo.png" style="width: 60px;height: 50px;" />
+        <a class="navbar-brand mx-2" href="/" style="color: white;">Canine Center</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            style="color: white;" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/myappointments">My Appointments <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/foster-dog">Foster Dogs<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dog-breeds">Dog Breeds</a>
+                  </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+                <a class="btn btn-outline-danger my-2 my-sm-0" type="submit" href="/logout">Logout</a>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- <div class="row justify-content-end mt-2">
+            <a class="btn btn-success my-2 my-sm-0" type="submit" href="/foster-dogs/add">Add</a>
+        </div> -->
+        <div class="row justify-content-between  align-items-center mt-4">
+            <h2 class="h2 font-weight-bolder text-muted">Find a Foster Dog</h2>
+            <div>
+                <a class="btn btn-success my-2 my-sm-0" href="/foster-dogs/add">Add</a>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <% for(var i=0; i<fosterDogs.length; i++) {%>
+            <div class="card m-4 col-3 p-0">
+                <div class="card-img-top" style="height: 180px;">
+                    <img src="/<%= fosterDogs[i].images[0].path%>" alt="..." style="max-width: 100%;height: 100%;">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"> <%= fosterDogs[i].breed.name %></h5>
+                    <p class="card-text text1"><%= fosterDogs[i].about %> </p>
+                    <p class="card-text text1"><%= fosterDogs[i].gender %></p>
+                    <div class="row justify-content-end mr-2">
+                        <a href="/foster-dogs/view/<%=fosterDogs[i]._id %>" class="btn btn-primary align-right">View</a>
+                    </div>
+                </div>
+            </div>
+            
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="BasicAuth">
+    <meta name="author" content="siddub">
+    <title>Canine Center</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            background: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3" style="color: white;">
+        <img src="/dog1.webp" style="width: 30px;height: 30px;" />
+        <a class="navbar-brand mx-2" href="/" style="color: white;">Canine Care</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            style="color: white;" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/users/myappointments">My Appointments</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/foster-dogs">Foster Dogs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dog-breeds">Dog Breeds</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+                <a class="btn btn-outline-danger my-2 my-sm-0" type="submit" href="/logout">Logout</a>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container" style="width:98%">
+        <h2 class="form-heading underline mt-4">My Appointments</h2>
+        <ul style="margin-top: 30px;" class="list-group">
+            <% for(var i=0; i<app.length; i++) {%>
+            <li class="text-success list-group-item"><span class="text-muted">Issue :</span>
+                <%= app[i].description %>, <br>
+                <span class="text-muted">Scheduled At: </span> <%= app[i].date %>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+    </div>
+
+</body>
+
+</html>
