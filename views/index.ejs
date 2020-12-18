@@ -38,7 +38,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4"
     style="color: white;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)">
-    <img src="/logo.png" style="width: 60px;height: 50px;" />
+    <img src="/logo.png" style="width: 60px;height: 50px;background-color: white;" />
     <a class="navbar-brand mx-2" href="/" style="color: white;">Canine Care</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       style="color: white;" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
             <a class="dropdown-item" type="button" href="/foster-dogs/add">Add a Foster Dog</a>
-            <a class="dropdown-item" type="button" disabled>My added dogs</a>
+            <a class="dropdown-item" type="button" href="/foster-dogs/added-dogs">My added dogs</a>
             <a class="dropdown-item" type="button" href="/foster-dogs">View All Dogs</a>
           </div>
         </div>
@@ -78,8 +78,8 @@
     </div>
   </nav>
 
-  <div class="container card" style="width:98%" style="background: white; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;margin-top: 30px;">
+  <div class="container card" style="background: white; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);background-color: #f9f9f9;
+  transition: 0.3s;">
 
     <h2 class="form-heading underline mt-4 text-center">Book an appointment</h2>
     <p class="text-center">
@@ -93,7 +93,7 @@
               <label for="name" class="font-weight-bold">Name</label>
               <input name="name" type="text" class="form-control bg-light " placeholder="Name" autofocus="true"
                 required />
-              <small>Enter your Name for you appointment</small>
+              <small class="text-muted">Enter your Name for you appointment</small>
             </div>
             <div class="mt-4 col-md-4 col-sm-8">
               <label for="email" class="font-weight-bold">Email</label>
@@ -109,6 +109,8 @@
             <div class="mt-4 col-md-4 col-sm-8">
               <label for="phone" class="font-weight-bold">Phone</label>
               <input name="phone" type="number" class="form-control bg-light " placeholder="Phone number" required />
+              <small class="text-muted">Enter your mobile which you like to contact.</small>
+
             </div>
           </div>
           <div class="row justify-content-center">
@@ -116,7 +118,7 @@
               <label for="name" class="font-weight-bold">Description</label>
               <textarea name="description" class="form-control bg-light " rows="5"
                 placeholder="Enter Description ..."></textarea>
-              <small>Describe your pet's issue in deatils.</small>
+              <small class="text-muted">Describe your pet's issue in deatils.</small>
             </div>
           </div>
           <div class="row justify-content-center">
@@ -127,70 +129,22 @@
         </form>
 
         <div class="mt-4">
-          <h1>Availble Services</h1>
+          <h1>Available Services</h1>
           <div class="row">
-            <div class="card m-4 col-3 p-0">
+            <% for(var i=0; i<services.length; i++) {%>
+            <div class="card m-4 col-3 p-0" style="box-shadow: 5px 8px 17px 4px rgba(213, 215, 222, 0.6);">
               <div class="card-img-top" style="height: 180px;">
-                <img src="/dog_walking.jpg" alt="..." style="max-width: 100%;height: 100%;">
+                <img src="/<%= services[i].images[0].path %>" alt="..." style="max-width: 100%;height: 100%;">
               </div>
               <div class="card-body">
-                <h5 class="card-title"> Dog walking</h5>
-                <p class="card-text text1">Dog walking is the act of a person walking with a dog, typically from the
-                  dog's residence and then returning. Leashes are commonly used for this </p>
+                <h5 class="card-title"> <%= services[i].title %></h5>
+                <p class="card-text text1"><%= services[i].description %> </p>
                 <div class="row justify-content-end mr-2">
-                  <!-- <a href="#" class="btn btn-info align-right">View Info</a> -->
-
+                  <a href="/dog-services/view/<%= services[i]._id %>" class="btn btn-primary align-right">More Info</a>
                 </div>
               </div>
             </div>
-
-            <div class="card m-4 col-3 p-0">
-              <div class="card-img-top" style="height: 180px;">
-                <img src="/dog-grooming-.jpg" alt="..." style="max-width: 100%;height: 100%;">
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"> Dog Grooming</h5>
-                <p class="card-text text1">Dog grooming refers to both the hygienic care and cleaning of a dog, as well
-                  as a process by which a dog's physical appearance is enhanced for showing or other types of
-                  competition. </p>
-                <div class="row justify-content-end mr-2">
-                  <!-- <a href="#" class="btn btn-info align-right">View Info</a> -->
-
-                </div>
-              </div>
-            </div>
-
-            <div class="card m-4 col-3 p-0">
-              <div class="card-img-top" style="height: 180px;">
-                <img src="/dog-boarding.jpg" alt="..." style="max-width: 100%;height: 100%;">
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"> Dog Boarding</h5>
-                <p class="card-text text1">The comfortable kennel stay and an opportunity to socialize with other dogs
-                  means that your pet can enjoy his holiday while you enjoy yours. </p>
-                <div class="row justify-content-end mr-2">
-                  <!-- <a href="#" class="btn btn-info align-right">View Info</a> -->
-
-                </div>
-              </div>
-            </div>
-
-            <div class="card m-4 col-3 p-0">
-              <div class="card-img-top" style="height: 180px;">
-                <img src="/dog-care.jpg" alt="..." style="max-width: 100%;height: 100%;">
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"> Specialty Care</h5>
-                <p class="card-text text1">Health care needs of pups & adults. Vaccination, deworming & regular
-                  healthcare schedule. Protect your pup from common parasitic infestation and keep them fit & healthy
-                </p>
-                <div class="row justify-content-end mr-2">
-                  <!-- <a href="#" class="btn btn-info align-right">View Info</a> -->
-                </div>
-              </div>
-            </div>
-
-
+            <% } %>
           </div>
         </div>
       </div>

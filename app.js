@@ -8,13 +8,16 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var fosterDogRouter = require('./routes/fosterdogs');
 var dogBreedsRouter = require('./routes/dog_breeds');
+var dogServicessRouter = require('./routes/dog_services');
 
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var mongoose = require('mongoose')
 var MongoStore = require('connect-mongo')(session);
 var app = express();
-
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({ path: __dirname + '/.env' });
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,6 +47,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/foster-dogs', fosterDogRouter);
 app.use('/dog-breeds', dogBreedsRouter);
+app.use('/dog-services', dogServicessRouter);
+
 
 
 

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../schema/userSchema');
 var {DogBreed} = require('../schema/dogBreed');
+var DogService = require('../schema/dogServices');
 
 
 var {
@@ -9,8 +10,9 @@ var {
   sessionLoginChecker
 } = require('../middlewares/sessionChecker')
 /* GET home page. */
-router.get('/', sessionAuthChecker, function (req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', sessionAuthChecker,async function (req, res, next) {
+  var services = await DogService.find({});
+  res.render('index', { title: 'Express', services });
 });
 
 router.get('/login', sessionLoginChecker, function (req, res, next) {
@@ -24,13 +26,10 @@ router.post('/login', function (req, res, next) {
     password: ''
   }
   return User.findOne({ email: req.body.email }, (err, user) => {
-    console.log(err, user);
     if (!user) {
       return res.render('login', { ...data, aleart: "Email/Password did Not found" })
     }
     user.comparePassword(req.body.password, (err, isMatch) => {
-      console.log(req.session, err, isMatch, "-----");
-
       if (err) {
         return res.render('login', { ...data, aleart: "Email/Password did not match." })
       }
@@ -45,10 +44,6 @@ router.get('/register', sessionLoginChecker, function (req, res, next) {
   return res.render('register', { errors: '' })
 });
 
-router.get('/dog-breeds', async function (req, res, next) {
-  var breeds = await DogBreed.find({});
-  return res.render('dogbreeds', { errors: '', breeds })
-});
 
 router.post('/register', function (req, res, next) {
   return User.findOne({ email: req.body.email }, (err, user) => {

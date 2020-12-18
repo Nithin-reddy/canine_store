@@ -1,5 +1,4 @@
 var sessionAuthChecker = (req, res, next) => {
-    console.log(req.session, "_+_}_+", req.cookies);
     if (req.session.user && req.cookies.user_sid) {
         req.user = req.session.user
         next();
@@ -9,7 +8,6 @@ var sessionAuthChecker = (req, res, next) => {
 };
 
 var sessionLoginChecker = (req, res, next) => {
-    console.log(req.session);
     if (req.session && req.session.user && req.cookies.user_sid) {
         res.redirect('/');
     } else {

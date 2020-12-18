@@ -17,11 +17,7 @@ router.get('', async function (req, res, next) {
 
 router.get('/view/:id',async function (req, res, next) {
     try {
-        console.log("0000000");
-        
         var breed = await DogBreed.findById(req.params.id);
-        console.log(breed);
-        
         return res.render('viewdogbreeds', { errors: '', breed })
     } catch (error) {
         console.log(error);

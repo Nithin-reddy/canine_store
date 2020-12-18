@@ -16,6 +16,15 @@
             background: #fafafa;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
+
+        .text1 {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* number of lines to show */
+            -webkit-box-orient: vertical;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -37,16 +46,15 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/users/myappointments">My Appointments <span
                             class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/foster-dogs">Foster Dogs<span
-                            class="sr-only">(current)</span></a>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/foster-dogs">Foster Dogs<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/dog-breeds">Dog Breeds<span class="sr-only">(current)</span></a>
@@ -54,32 +62,32 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <div class="dropdown mx-4">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false">
-                      Foster Dogs
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Foster Dogs
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                      <a class="dropdown-item" type="button" href="/foster-dogs/add">Add a Foster Dog</a>
-                      <a class="dropdown-item" type="button" href="/foster-dogs/added-dogs">My added dogs</a>
-                      <a class="dropdown-item" type="button" href="/foster-dogs">View All Dogs</a>
+                        <a class="dropdown-item" type="button" href="/foster-dogs/add">Add a Foster Dog</a>
+                        <a class="dropdown-item" type="button" href="/foster-dogs/added-dogs">My added dogs</a>
+                        <a class="dropdown-item" type="button" href="/foster-dogs">View All Dogs</a>
                     </div>
-                  </div>
+                </div>
                 <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
                 <a class="btn btn-outline-danger my-2 my-sm-0" type="submit" href="/logout">Logout</a>
             </form>
         </div>
     </nav>
 
-    <div class="container pb-4">
+    <div class="container pb-4 ">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             </ol>
             <div class="carousel-inner">
-                <% for(var i=0; i<fosterDog.images.length; i++) {%>
-                <div class="carousel-item <%= i== 0 ? 'active' : ''%>" style="max-height: 400px;">
-                    <img src="https://methille.sirv.com/<%= fosterDog.images[i].path%>" class="d-block w-100" alt="..." style="height: 90%;">
+                <% for(var i=0; i<service.images.length; i++) {%>
+                <div class="carousel-item text-center <%= i== 0 ? 'active' : ''%>" style="max-height: 550px;">
+                    <img src="/<%= service.images[i].path%>" class="d-block h-100 w-full " alt="...">
                 </div>
                 <% } %>
             </div>
@@ -92,18 +100,33 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        <div class="card w-100 p-4">
-            <h1 class="p-2 border-bottom"><%= fosterDog.breed.name%></h1>
-            <ul class="capitalize">
-                <li><strong>Gender: </strong> <%=fosterDog.gender%></li>
-                <li><strong>Age group: </strong><%=fosterDog.dog_age%></li>
-                <li><strong>Location: </strong><%=fosterDog.location%></li>
-            </ul>
+        <div class="card w-100 p-4 mt-4">
+            <h1 class="p-2"><%- service.title%></h1>
             <div class="border w-100 my-2"></div>
             <h1>About</h1>
-            <p class="my-2">
-                <%=fosterDog.about%>
+            <p class="my-4">
+                <%-service.description%>
             </p>
+        </div>
+
+        <h1 class="my-4">Other Services</h1>
+
+        <div class="row">
+            <% for(var i=0; i<services.length; i++) {%>
+            <div class="card m-4 col-3 p-0" style="box-shadow: 5px 8px 17px 4px rgba(213, 215, 222, 0.6);">
+                <div class="card-img-top" style="height: 180px;">
+                    <img src="/<%= services[i].images[0].path %>" alt="..." style="max-width: 100%;height: 100%;">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"> <%= services[i].title %></h5>
+                    <p class="card-text text1"><%= services[i].description %> </p>
+                    <div class="row justify-content-end mr-2">
+                        <a href="/dog-services/view/<%= services[i]._id %>" class="btn btn-primary align-right">More
+                            Info</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
         </div>
     </div>
 </body>

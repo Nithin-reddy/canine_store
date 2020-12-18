@@ -44,7 +44,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/dog-breeds">Dog Breeds<span class="sr-only">(current)</span></a>
-                  </li>
+                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
@@ -64,21 +64,23 @@
                     <label for="name" class="font-weight-bold">Breed</label>
                     <select name="breed" id="dogBreed" class="form-control bg-light " required>
                         <% for(var i=0; i<dogs.length; i++) {%>
-                        <option value="<%= dogs[i]._id %>"><%= dogs[i].name %></option>
+                        <option value="<%= dogs[i]._id %>">
+                            <%= dogs[i].name %>
+                        </option>
                         <% } %>
                     </select>
                     <!-- <input name="name" type="text" class="form-control bg-light " placeholder="Name" autofocus="true" /> -->
-                    <small>Select your Breed of the Dog</small>
+                    <small>Select the Breed of the Dog</small>
                 </div>
                 <div class="mt-4 col-4">
-                    <label for="name" class="font-weight-bold">Dog Age</label>
+                    <label for="name" class="font-weight-bold">Dog Age Group</label>
                     <select name="dog_age" id="dogBreed" class="form-control bg-light " required>
                         <option value="puppy">Puppy</option>
                         <option value="young">Young</option>
                         <option value="adult">Adult</option>
-                        <option value="old">old</option>
+                        <option value="old">Old</option>
                     </select>
-                    <small>Enter your Email for you appointment</small>
+                    <small>Seclet the age group of the dog.</small>
                 </div>
                 <div class="mt-4 col-4">
                     <label for="name" class="font-weight-bold">Dog gender</label>
@@ -86,7 +88,7 @@
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
-                    <small>Enter gender of dog</small>
+                    <small>Select gender of dog</small>
                 </div>
             </div>
 
@@ -94,7 +96,7 @@
                 <label for="name" class="font-weight-bold">About</label>
                 <textarea name="about" class="form-control bg-light " rows="5"
                     placeholder="Enter Description of the dog..." required></textarea>
-                <small>Describe dogs in deatils.</small>
+                <small>Describe about the dog in deatils.</small>
             </div>
 
             <div class="row">
@@ -121,7 +123,6 @@
                     required />
                 <br>
                 <small>Add pictures of the dog so that public can view it.</small>
-
             </div>
             <button class="btn btn-primary btn-block mt-4 mb-4" type="submit">Add</button>
         </form>

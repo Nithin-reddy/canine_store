@@ -77,4 +77,4 @@ var DogBreed = mongoose.model('DogBreed', dogBreedSchema);
 
 module.exports = {
     DogBreed
-}
+};
